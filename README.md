@@ -40,11 +40,8 @@ With the help of the sheet API, we are communicating with google sheet and pytho
 ![Screenshot](flow.JPG)
 
 
-
-
-
 **Airflow**
-![Screenshot](flow.JPG)
+![Screenshot](airflow.JPG)
 
 
 
