@@ -1,37 +1,39 @@
 from airflow import DAG
-from airflow.operators.python_operators import PythonOperator 
+from airflow.operators.python_operator import PythonOperator 
 from datetime import timedelta, datetime
-from scraping import get_player_info
 
-import gspread
 import requests
 from bs4 import BeautifulSoup as bs4
+import gspread
 
 
-def add_data():
-    player_data =[]
-    gc = gspread.service_account(filename = "creds.json")
+def update_gsheet(ti):
+    player_data = ti.xcom_pull(key = 'player_data', task_ids = 	'run_scraper')
+    gc = gspread.service_account(filename = "/home/arvind/airflow/dags/creds.json")
     sh = gc.open("scraped_data").sheet1
 
-    # for dic in player_data:
-    #     sh.append_row([dic["picture"],
-    #                   dic["ID"], 
-    #                   dic["flag"],
-    #                   dic["Name"],
-    #                   dic["Age"],
-    #                   dic["Position"],
-    #                   dic["Overall"],
-    #                   dic["Potential"],
-    #                   dic["Team_image"],
-    #                   dic["Team"],
-    #                   dic["Value"],
-    #                   dic["Wage"],
-    #                   dic["Total_Point"] ])
-add_data()
+    for dic in player_data:
+       sh.append_row([dic["picture"],
+                      dic["ID"], 
+                      dic["flag"],
+                      dic["Name"],
+                      dic["Age"],
+                      dic["Position"],
+                      dic["Overall"],
+                      dic["Potential"],
+                      dic["Team_image"],
+                      dic["Team"],
+                      dic["Value"],
+                      dic["Wage"],
+                      dic["Total_Point"] ])
+
+#def insert_gsheet(ti):
+
+#    print(f"data inserted in gsheet: {player_data}")
 
 
 
-def get_player_info(**kwargs):
+def get_player_info(ti, **kwargs):
     offset = kwargs.get("offset", 60)
     player_data = []
     url = f"https://sofifa.com/players?offset={offset}"
@@ -62,7 +64,7 @@ def get_player_info(**kwargs):
             pass
         try:        
             
-            data_dic["Age"] = td[2].text.split()
+            data_dic["Age"] = td[2].text.strip()
         except:
             pass
         try:
@@ -107,11 +109,9 @@ def get_player_info(**kwargs):
             pass
         player_data.append(data_dic)
 
-        
-    return player_data
-
-
-
+    ti.xcom_push(key = "player_data", value = player_data)
+    #return player_data
+    
 default_args ={
  'owner': 'airflow',
     'depends_on_past': False,
@@ -139,7 +139,7 @@ with DAG(
     
     push_to_gsheet = PythonOperator(
         task_id = "push_to_gsheet",
-        python_callable = insert_gsheet,
+        python_callable = update_gsheet,
     )
 
     run_scraper >> push_to_gsheet
