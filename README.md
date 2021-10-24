@@ -48,7 +48,7 @@ With the help of the sheet API, we are communicating with google sheet and pytho
 
 question and asnwer
 
-1. How to get api access for google sheet
+1. How to get api access for google sheet?
 
 `      `Answer: You can get it from <https://developers.google.com/sheets/api> 
 
@@ -56,6 +56,6 @@ question and asnwer
 
 `     `Answer Yes, Airflow comes with a different different operator which can help us to insert data    to db of your choice. In my case, I tried to keep things as simple as I can.
 
-3. `` Why so many failed at pushed_to_gsheet?
+3. `` Why so many failed at pushed_to_gsheet?  
 `    `Answer: For free tier google sheet API have limit for per minute call, which is causing stream to get fail.
 
