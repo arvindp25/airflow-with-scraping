@@ -1,4 +1,4 @@
-**Automating web scraping task with Apache airflow**
+###Automating web scraping task with Apache airflow
 
 This is a High level document which  discusses how we can automate daily web scraping tasks with apache airflow and monitor them easily.
 
@@ -36,15 +36,15 @@ With the help of the sheet API, we are communicating with google sheet and pytho
 
 **Python Operator:** Python operator used to execute python callable, in our case we are using two python callable get\_player\_info, update\_sheet.
 
-
-**
-
-
+**Flow**
+![Screenshot](flow.JPG)
 
 
 
-Airflow
 
+
+**Airflow**
+![Screenshot](flow.JPG)
 
 
 
