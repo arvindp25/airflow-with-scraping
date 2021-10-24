@@ -8,21 +8,6 @@ import requests
 from bs4 import BeautifulSoup as bs4
 
 
-creds = {
-  "type": "service_account",
-  "project_id": "gspread-330006",
-  "private_key_id": "e5294426192d31a9b4a214deb9f8da2f5d3320fa",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDCBg3BUzkJgDY1\n83I1vgl8yl1jfWvzPFp8V1gRX4dFeT1jh4g+7qrI37QZBRIxOacZH77Dif3vFG5X\nfJcIUF7tsk67AIzRCM1khuq78jHGhq99FTt+oMWFqmSUdifLBYul7gHXnc0TWeZd\nQrt0lHXAanfKshahTVvFHZGc3Jhj9hmZ1/TOlVZnfEiU68nmCY8Mssi+k3AzKTJY\n6c3HHv2AHXj6GKS8gpq8uZloEsKoQnZ8MrwaPXUlzq4r3lMjtGO/IV1+g0WnWUIj\ngq0Kkh1m6wUAnvBvn/w1qMP9QE6w4J8SnrhCJ1P0bkOwjWHvvX6IWyjmo+HimE1m\n8zcUuB3PAgMBAAECggEACo9nykDsVs8KpE8WxUQNoiQlhxe5e2iqiB/85B0t8KMT\nq0oiKUK2Ou6qD76N6e34YU6wBFaLYqrbApn+Ym51bDyLOnRiNbJj83fAaPBaszJ7\ndLRmI5M+jPLkPIxdyBgKLMLSiNjG46m99w99wm+eJRXmZTriLm9WclkUptP+21ne\nWrgVWCnrdTeoY6kSK2XEA/GHVL1B1XsdFTtmUCMJCyxjXx+eOAjgFg8KNXdy6JVI\nmJxIKuVzxKdCfZ6SiDacY7tKiAdQtzE3Ybpx8HUMYIWmOGUsGSuy5p/mNuBOH/r2\nn6ZzfYmNfDsQvQ79jTOyJB4NhIBupeWosG4Gjn2WEQKBgQDzFZHhlAC+03vnQP8x\nf947yD2/5kmFJSeDEWokFtXR+2mpWFnx2JRJ7iF7Uau3pV2dXOXzY4CzBAhFGd+N\n/RNi8J5zDboRU/LUwzi8IpSbuj9V2YfVC4aEJh7Zb5cefctz908rYyRMlICqi6or\nQOjguiuEfhKqtfxVN4HMcgGb9wKBgQDMVSlvSmwkPEqeF+RtBFpN59YL6WY5zdlP\nXwEYUWHYd3dFS9aSw0TuobrDQ20dz/71jOZit6A35bPP2ieGJzFb7cD6IpGaDss4\ns6AEE1bxTl1CWQNoKMLWs2bVLqxYlcI7Wq1p/gNQc3tFvVgnPSF01rZzWbb0jIrY\nrCBRjRmm6QKBgQC3PNk8zA5LyqupxOsZayQguG8jyvo8rac9O9Fg5v3DTdt2Vi1n\nCzWtDR6cERJ6WuNYjgChGa6YQz/gpwJHzC/i8zLd08kg6sEv9QE9gGu5gAniMxob\nVJbP4tR6X43w5C6Lei9pq1BfkcnzxVg/RqzFSlEnjMmReaF+s1ravE3OPQKBgDmL\nrmyqYARgen9FqU5OkIQqS6z1IZYb9ByXW/6WROEq3AtHDXotxkcSgz+kyKFBx8Mt\n2GBq6JN1fIuIG+N7PDpwng2UGL9zdSZV6DXdoHm7ISajXQNDn4PJ6KcXSvBz1MzU\nf8w+/n301/3PEnmSjM6T/bREyvLadewJpdxxyYypAoGBAMk9uoIjyb8kqkT3PKgQ\np1Fx0+y7lsrXrxLVDSnKUgIZiCQE8jtxPtr9gC3OldSmBpTO2ULF/HtgHWVyQXpD\nh1LBwZRsyYfYMMBueayrX69+hpgpJiXTBVWrycZwhhKqJCvhet6AN504w1PBapXn\nwfPB2dwQMZkUolkoon/ehciv\n-----END PRIVATE KEY-----\n",
-  "client_email": "gspread@gspread-330006.iam.gserviceaccount.com",
-  "client_id": "103670363662717283605",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/gspread%40gspread-330006.iam.gserviceaccount.com"
-}
-
-
-
 def add_data():
     player_data =[]
     gc = gspread.service_account(filename = "creds.json")
