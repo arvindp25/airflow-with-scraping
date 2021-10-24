@@ -1,13 +1,21 @@
+# import inbuilt python module
+from datetime import timedelta, datetime
+import requests
+
+# import relted to airflow
 from airflow import DAG
 from airflow.operators.python_operator import PythonOperator 
-from datetime import timedelta, datetime
-
-import requests
+# import bs4 and sprread
 from bs4 import BeautifulSoup as bs4
 import gspread
 
 
 def update_gsheet(ti):
+    '''
+    used to update data to google sheet
+    Note:- change creds.json file
+    '''
+    # xcom to pull data from upsteream
     player_data = ti.xcom_pull(key = 'player_data', task_ids = 	'run_scraper')
     gc = gspread.service_account(filename = "/home/arvind/airflow/dags/creds.json")
     sh = gc.open("scraped_data").sheet1
@@ -110,8 +118,9 @@ def get_player_info(ti, **kwargs):
         player_data.append(data_dic)
 
     ti.xcom_push(key = "player_data", value = player_data)
-    #return player_data
     
+    
+# --------------------------Airflow Code --------------------------------------    
 default_args ={
  'owner': 'airflow',
     'depends_on_past': False,
